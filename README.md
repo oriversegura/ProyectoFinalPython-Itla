@@ -8,17 +8,25 @@
   - Permitir al usuario ingresar una descripción para la tarea.
   - Solicitar información adicional como fecha límite, prioridad, categoría, etc.
   - Asignar un identificador único a cada tarea.
+
+nombre de la tarea, nota de la tarea, fecha de creacion, fecha limite, prioridad, categoria, id tarea.
    
-### Leer Tareas:
+### Leer Tareas:***
   - Mostrar la lista de tareas existentes con sus detalles (descripción, fecha límite, prioridad, etc.).
   - Posibilidad de filtrar y ordenar las tareas según diferentes criterios.
+
+ingresar al diccionario de las tareas y buscarlas por id, imprimirlas segun la info. 
 
 ### Actualizar Tarea:
   - Permitir al usuario modificar la descripción, fecha límite, prioridad u otros detalles de una tarea existente.
   - Posibilidad de cambiar el estado de la tarea (pendiente, en progreso, completada, etc.).
 
+buscar la tarea y preguntar al usuario lo que se va a modificar.
+
 ### Eliminar Tarea:
   - Proporcionar la opción de eliminar una tarea específica a través de su identificador.
+
+buscarla por id o por nombre y sacarla del diccionario.
 
 ## Clasificación y Visualización
 
