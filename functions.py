@@ -112,12 +112,20 @@ def crear_tarea():
             
 #buscar las tareas
 def listar_tareas(): 
+    '''
+    Funcion para listar las tareas por 2 criterios o listar todas las tareas:
+    criterio 1: listar por estado donde pide si es pendiente o completado
+    criterio 2: listar por prioridad donde pide si es baja, media o alta
+    
+    '''
+    # Desplegando menu de criterios de listar tareas
     menu = ['1. Listar por estado', '2. Listar por prioridad', '3. Listar todas']
     for item in menu:
-        print(item)        
+        print(item)            
     seleccion = int(input("Seleccione la opcion deseada: "))
+    
+    # Opcion estado
     if seleccion == 1:
-        
         select = int(input("Seleccione 1. Pendiente o 2. Completado: "))
         if select == 1:
             for item in tareas:
@@ -130,7 +138,7 @@ def listar_tareas():
         else:
             print("Seleccione la opcion correcta!")
             listar_tareas()
-            
+    # Opcion prioridad        
     elif seleccion == 2:
         select = int(input("Seleccione 1. baja, 2. media o 3. alta: "))
         if select == 1:
@@ -148,7 +156,7 @@ def listar_tareas():
         else:
             print("Seleccione una opcion valida! ")
             listar_tareas()
-    
+    # Opcion todas
     elif seleccion == 3:
         pprint.pprint(tareas)
     else:
@@ -161,11 +169,17 @@ def actualizar_tarea():
     pass
 
 def eliminar_tareas():
+    '''
+    funcion para eliminar las tareas con 2 criterios de busqueda: No. y Nombre
+    Todo dentro de un menu para facilidad del usuario
+    '''
+    # Desplegamos menu corto de opciones
     menu = ['No.', 'Nombre' ]
     for item in menu: 
         print(item)
     seleccion = int(input("Ingrese el tipo de busqueda de tarea 1. No. 2. Nombre: "))
     
+    # Opcion numero de tarea o No.
     if seleccion == 1: 
         for tarea in tareas: 
             no_tarea = int(input("Ingrese el numero de la tarea: "))
@@ -173,7 +187,9 @@ def eliminar_tareas():
                 tareas.remove(tarea)
             else:
                 print("Ingrese un nombre de tarea valido!")
-                eliminar_tareas()   
+                eliminar_tareas()
+                 
+    # Opcion nombre de tarea              
     elif seleccion == 2: 
         for tarea in tareas:
             nombre_tarea = input("Ingrese el nombre de la tarea: ")
@@ -183,3 +199,6 @@ def eliminar_tareas():
             else:
                 print("Ingrese un nombre de tarea valido!")
                 eliminar_tareas()
+    else: 
+        print("Ingrese una opcion valida!")
+        eliminar_tareas()
