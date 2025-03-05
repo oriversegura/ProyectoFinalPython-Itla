@@ -4,7 +4,7 @@
 import json
 #Libreria para manejar las marcas de tiempo
 from datetime import datetime
-# Libreria pprint para mostrar mejor los items
+# Libreria pprint para mostrar mejor las tareas en la consola
 import pprint
 
 '''
