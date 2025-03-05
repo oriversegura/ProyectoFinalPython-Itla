@@ -4,10 +4,13 @@ import time
 # Libreria con las funciones logicas de la app
 from functions import *
 
+tareas
+cargar_tareas()
+
 # Bucle while para el funcionamiento continuo de la app
 while True:
     # Mensaje de bienvenida a la app y el menu de opciones
-    print("****** Bienvenid@ a la App de Gestion de Tareas***** \n")
+    print("****** Bienvenid@ a la App de Gestion de Tareas ***** \n")
     time.sleep(0.5)
     print("Menu: \n")
     time.sleep(0.5)
@@ -27,8 +30,7 @@ while True:
     # Usamos match para proceder con las decisiones del usuario    
     match seleccion:
         case 1:
-            pass
-        case 2:
+            crear_tarea()
             pass
         case 3:
             pass
@@ -36,8 +38,10 @@ while True:
             pass
         case 5:
             print("Saliendo de la app......")
+            guardar_tareas()
             # Tiempo de espera al usuario por decision del desarrollador
             time.sleep(5)
             break
         case _:
             print("Seleccione una opcion valida! ")    
+1

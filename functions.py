@@ -1,8 +1,9 @@
 #Importamos las librerias necesarias
+
 #Libreria para manejar los archivos JSON
 import json
 #Libreria para manejar las marcas de tiempo
-from datetime import datetime, timedelta
+from datetime import datetime
 
 '''
 id_tarea (expresado como numero identificador de la tarea)
@@ -24,6 +25,7 @@ def guardar_tareas(archivo='tareas.json'):
     try:
         with open(archivo, 'w') as file:
             json.dump(tareas, file, indent=4)
+            print("Se guardo correctamente!")
     except:
         print("Error al crear el archivo JSON ")
         
@@ -34,40 +36,69 @@ def cargar_tareas(archivo='tareas.json'):
         with open(archivo, 'r') as file:
             global tareas
             tareas = json.load(file) # Carga la lista desde el archivo json
-            
+            print("Se cargo correctamente!")
             # Actualiza el contador basado en el ultimo contador de la lista
             if tareas:
-                id_tarea = max(id_tarea['id'] for tarea in tareas) + 1
+                id_tarea = max(tarea['No.' ] for tarea in tareas) + 1  
+            else:
+                tareas = 1
+                
+                
     # Maneja el error si no se encuentra el archivo    
     except FileNotFoundError as e:
         print(f"No se encontro el archivo. {e}")
     # Maneja el error si no logra leer el archivo    
     except json.JSONDecodeError as e:
-        print(f"Error al leer el archivo JSON {e}")
+        print(f"Error al leer el archivo JSON. {e}")
         
 # crear las tareas    
-def crear_tarea(nombre, tarea, prioridad, estado):
+def crear_tarea():
     '''
     Ingresa 3 argumentos:
     Nombre: nombre para la tarea (hacerla facil de recordar)
     Tarea: Un texto descriptivo para tu tarea
     Prioridad: Una prioridad para tu tarea (baja, media o alta)    
     '''
-    try:    
+    
+    try:
+        global tareas    
         global id_tarea 
         nombre = input("Ingrese el nombre de la tarea a realizar: ")
         tarea = input("Ingrese la tarea a realizar: ")
-        prioridad = input("Ingrese la prioridad de la tarea (baja, media, alta): ")
-        estado = input("Indique el estado de la tarea (pendiente o completada) : ")
-        fecha_creacion = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        fecha_limite = fecha_creacion + timedelta(days= 7)    
+        prioridades = ['baja', 'media', 'alta']
+        seleccionP = int(input(f"Seleccione la prioridad de la tarea 1.{prioridades[0]} 2.{prioridades[1]} 3.{prioridades[2]}: "))
+        while True:    
+            if seleccionP == 1:
+                prioridad = prioridades[0]
+                break
+            elif seleccionP == 2:
+                prioridad = prioridades[1]
+                break
+            elif seleccionP == 3:
+                prioridad = prioridades[2]
+                break
+            else:
+                print("Seleccione una opcion correcta!")  
+        estados = ['pendiente', 'completado']
+        seleccionE = int(input(f"Seleccione el estado de la tarea 1.{estados[0]} 2.{estados[1]} :" ))
+        while True:    
+            if seleccionE == 1:
+                estado = estados[0]
+                break
+            elif seleccionE == 2:
+                estado = estados[1]
+                break
+            else:
+                print("Seleccione una opcion correcta!")            
+        fecha_creacion = datetime.now().strftime("%d-%m-%Y, %H:%M")
+        fecha_limite = input("Ingrese la fecha de finalizacion de la tarea (Separada por guiones): ")    
         nueva_tarea = {
             "No." : id_tarea,
             "Nombre" : nombre,
             "Fecha_Creacion": fecha_creacion,
             "Fecha_ Limite": fecha_limite,
             "Tarea" : tarea,
-            "Prioridad" : prioridad,
+            "Prioridad" : prioridad.lower(),
             "Estado": estado
             }
         tareas.append(nueva_tarea)   
@@ -76,12 +107,16 @@ def crear_tarea(nombre, tarea, prioridad, estado):
         
     except Exception as e:
         print(f"La tarea no se pudo añadir {e}")
+        guardar_tareas()
         
             
 #buscar las tareas
-def buscar_tareas(criterio):
+def listar_tareas(): 
     pass
 
 # actualizar tareas
-def actualizar_tarea(nombre_tarea, fecha_limite, prioridad, categoria):
+def actualizar_tarea():
+    pass
+
+def eliminar_tareas():
     pass
