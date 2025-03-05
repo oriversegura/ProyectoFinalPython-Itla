@@ -150,7 +150,7 @@ def listar_tareas():
             listar_tareas()
     
     elif seleccion == 3:
-        pprint.pprint(item)
+        pprint.pprint(tareas)
     else:
         print("Seleccione una opcion valida! ")
         listar_tareas()
@@ -161,4 +161,25 @@ def actualizar_tarea():
     pass
 
 def eliminar_tareas():
-    pass
+    menu = ['No.', 'Nombre' ]
+    for item in menu: 
+        print(item)
+    seleccion = int(input("Ingrese el tipo de busqueda de tarea 1. No. 2. Nombre: "))
+    
+    if seleccion == 1: 
+        for tarea in tareas: 
+            no_tarea = int(input("Ingrese el numero de la tarea: "))
+            if tarea['No.'] == no_tarea:
+                tareas.remove(tarea)
+            else:
+                print("Ingrese un nombre de tarea valido!")
+                eliminar_tareas()   
+    elif seleccion == 2: 
+        for tarea in tareas:
+            nombre_tarea = input("Ingrese el nombre de la tarea: ")
+            if tarea['Nombre'] == nombre_tarea:
+                tareas.remove(tarea)
+                print("Tarea eliminada exitosamente! \n")
+            else:
+                print("Ingrese un nombre de tarea valido!")
+                eliminar_tareas()

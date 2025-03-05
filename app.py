@@ -38,7 +38,7 @@ while True:
         case 3:
             pass
         case 4:
-            pass
+            eliminar_tareas()
         case 5:
             print("Saliendo de la app......")
             guardar_tareas()
