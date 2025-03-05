@@ -1,5 +1,4 @@
 [
-    {},
     {
         "No.": 1,
         "Nombre": "Prueba",
@@ -7,6 +6,15 @@
         "Fecha_ Limite": "12-03-2025",
         "Tarea": "Probar todo",
         "Prioridad": "baja",
+        "Estado": "pendiente"
+    },
+    {
+        "No.": 2,
+        "Nombre": "prueba",
+        "Fecha_Creacion": "05-03-2025, 00:46",
+        "Fecha_ Limite": "20-03-2025",
+        "Tarea": "probar la app",
+        "Prioridad": "media",
         "Estado": "pendiente"
     }
 ]

@@ -4,6 +4,8 @@
 import json
 #Libreria para manejar las marcas de tiempo
 from datetime import datetime
+# Libreria pprint para mostrar mejor los items
+import pprint
 
 '''
 id_tarea (expresado como numero identificador de la tarea)
@@ -39,11 +41,10 @@ def cargar_tareas(archivo='tareas.json'):
             print("Se cargo correctamente!")
             # Actualiza el contador basado en el ultimo contador de la lista
             if tareas:
-                id_tarea = max(tarea['No.' ] for tarea in tareas) + 1  
+                id_tarea = max(tarea['No.'] for tarea in tareas) + 1  
             else:
                 tareas = 1
-                
-                
+                     
     # Maneja el error si no se encuentra el archivo    
     except FileNotFoundError as e:
         print(f"No se encontro el archivo. {e}")
@@ -54,10 +55,9 @@ def cargar_tareas(archivo='tareas.json'):
 # crear las tareas    
 def crear_tarea():
     '''
-    Ingresa 3 argumentos:
-    Nombre: nombre para la tarea (hacerla facil de recordar)
-    Tarea: Un texto descriptivo para tu tarea
-    Prioridad: Una prioridad para tu tarea (baja, media o alta)    
+    recibe por consola: el nombre de la tarea, la tarea a realizar, 
+    luego tiene menu para seleccionar la prioridad y el estado de la tarea
+    y al final le pide al usuario en un formato especifico la fecha de finalizacion de la tarea
     '''
     
     try:
@@ -112,8 +112,50 @@ def crear_tarea():
             
 #buscar las tareas
 def listar_tareas(): 
-    pass
+    menu = ['1. Listar por estado', '2. Listar por prioridad', '3. Listar todas']
+    for item in menu:
+        print(item)        
+    seleccion = int(input("Seleccione la opcion deseada: "))
+    if seleccion == 1:
+        
+        select = int(input("Seleccione 1. Pendiente o 2. Completado: "))
+        if select == 1:
+            for item in tareas:
+                if item['Estado']  == 'pendiente': 
+                    pprint.pprint(item)
+        elif select == 2:
+            for item in tareas:
+                if item['Estado'] == 'completado':
+                    pprint.pprint(item)
+        else:
+            print("Seleccione la opcion correcta!")
+            listar_tareas()
+            
+    elif seleccion == 2:
+        select = int(input("Seleccione 1. baja, 2. media o 3. alta: "))
+        if select == 1:
+            for item in tareas:
+                if item['Prioridad']  == 'baja': 
+                    pprint.pprint(item)
+        elif select == 2:
+            for item in tareas:
+                if item['Prioridad'] == 'media':
+                    pprint.pprint(item)
+        if select == 3:
+            for item in tareas:
+                if item['Prioridad']  == 'alta': 
+                    pprint.pprint(item)
+        else:
+            print("Seleccione una opcion valida! ")
+            listar_tareas()
+    
+    elif seleccion == 3:
+        pprint.pprint(item)
+    else:
+        print("Seleccione una opcion valida! ")
+        listar_tareas()
 
+    
 # actualizar tareas
 def actualizar_tarea():
     pass

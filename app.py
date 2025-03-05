@@ -5,6 +5,7 @@ import time
 from functions import *
 
 tareas
+
 cargar_tareas()
 
 # Bucle while para el funcionamiento continuo de la app
@@ -31,7 +32,9 @@ while True:
     match seleccion:
         case 1:
             crear_tarea()
-            pass
+            
+        case 2:
+            listar_tareas()        
         case 3:
             pass
         case 4:
