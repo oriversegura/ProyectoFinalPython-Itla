@@ -96,7 +96,7 @@ def crear_tarea():
             "No." : id_tarea,
             "Nombre" : nombre,
             "Fecha_Creacion": fecha_creacion,
-            "Fecha_ Limite": fecha_limite,
+            "Fecha_Limite": fecha_limite,
             "Tarea" : tarea,
             "Prioridad" : prioridad.lower(),
             "Estado": estado
@@ -162,12 +162,71 @@ def listar_tareas():
     else:
         print("Seleccione una opcion valida! ")
         listar_tareas()
-
     
 # actualizar tareas
 def actualizar_tarea():
-    pass
-
+    menu = ['No.', 'Nombre' ]
+    for item in menu: 
+        print(item)
+    seleccion = int(input("Ingrese el tipo de busqueda de tarea 1. No. 2. Nombre: "))
+    
+    # Opcion numero de tarea o No.
+    if seleccion == 1: 
+        for tarea in tareas: 
+            no_tarea = int(input("Ingrese el numero de la tarea: "))
+            if tarea['No.'] == no_tarea:
+                actualizar(tarea)    
+    elif seleccion == 2:
+        for tarea in tareas:
+            nombre_tarea = input("Ingrese el nombre de la tarea: ")
+            if tarea['nombre'] == nombre_tarea:
+                actualizar(tarea)
+                
+# Proceso de actualizacion separado                                             
+def actualizar(tarea):                
+    menu2 = ['1. Nombre', '2. Tarea', '3. Fecha Finalizacion', '4. Prioridad', '5. Estado']
+    for item in menu2:
+        print(item)
+    seleccion2 = int(input("Seleccione una opcion: "))
+    match seleccion2:
+        case 1:
+            nuevo_nombre = input("Ingrese el nuevo nombre de la tarea: ")
+            item.update('Nombre', nuevo_nombre)   
+        case 2:
+            nueva_tarea = input("Ingrese la nueva tarea: ")
+            item.update('Tarea', nueva_tarea)
+        case 3:
+            nueva_fecha = input("Ingrese la nueva fecha limite de la tarea: ")
+            item.update('Fecha_Limite')
+        case 4:
+            prioridades = ['1. baja', '2. media', '3. alta']
+            for item in prioridades:
+                print(item)
+            nueva_prioridad = int(input("Seleccione la prioridad deseada:"))
+            if nueva_prioridad == 1:
+                item.update('Prioridad', "baja")
+                print("Prioridad actualizada con exito!")        
+            elif nueva_prioridad == 2:
+                item.update('Prioridad', "media")
+                print("Prioridad actualizada con exito!")
+            elif nueva_prioridad == 3:
+                item.update('Prioridad', "alta")
+                print("Prioridad actualizada con exito!")    
+            else:
+                print("Ingrese una opcion correcta!")
+        case 5:
+            estados = ['1. pendiente', '2. completado']
+            for item in estados:
+                print(item)
+            nuevo_estado = int(input("Seleccione el nuevo estado deseado:"))
+            if nuevo_estado == 1:
+                item.update('Estado', "pendiente")
+                print("Estado actualizado con exito!")        
+            elif nueva_prioridad == 2:
+                item.update('Estado', "completado")
+                print("Estado actualizado con exito!")    
+            else:
+                print("Ingrese una opcion valida!")                    
 def eliminar_tareas():
     '''
     funcion para eliminar las tareas con 2 criterios de busqueda: No. y Nombre
