@@ -36,7 +36,7 @@ while True:
         case 2:
             listar_tareas()        
         case 3:
-            pass
+            actualizar_tarea()
         case 4:
             eliminar_tareas()
         case 5:
