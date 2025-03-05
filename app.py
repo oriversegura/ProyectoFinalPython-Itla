@@ -32,9 +32,8 @@ while True:
     match seleccion:
         case 1:
             crear_tarea()
-            
         case 2:
-            listar_tareas()        
+            listar_tareas()
         case 3:
             actualizar_tarea()
         case 4:
@@ -46,5 +45,5 @@ while True:
             time.sleep(5)
             break
         case _:
-            print("Seleccione una opcion valida! ")    
+            print("Seleccione una opcion valida! ")
 1
