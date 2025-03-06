@@ -43,7 +43,7 @@ def cargar_tareas(archivo='tareas.json'):
             if tareas:
                 id_tarea = max(tarea['No.'] for tarea in tareas) + 1  
             else:
-                tareas = 1
+                id_tarea = 1
                      
     # Maneja el error si no se encuentra el archivo    
     except FileNotFoundError as e:
@@ -62,11 +62,17 @@ def crear_tarea():
     
     try:
         global tareas    
+        
         global id_tarea 
+        
         nombre = input("Ingrese el nombre de la tarea a realizar: ")
+       
         tarea = input("Ingrese la tarea a realizar: ")
+       
         prioridades = ['baja', 'media', 'alta']
+       
         seleccionP = int(input(f"Seleccione la prioridad de la tarea 1.{prioridades[0]} 2.{prioridades[1]} 3.{prioridades[2]}: "))
+       
         while True:    
             if seleccionP == 1:
                 prioridad = prioridades[0]
@@ -78,9 +84,12 @@ def crear_tarea():
                 prioridad = prioridades[2]
                 break
             else:
-                print("Seleccione una opcion correcta!")  
+                print("Seleccione una opcion correcta!")
+                           
         estados = ['pendiente', 'completado']
-        seleccionE = int(input(f"Seleccione el estado de la tarea 1.{estados[0]} 2.{estados[1]} :" ))
+       
+        seleccionE = int(input(f"Seleccione el estado de la tarea 1.{estados[0]} 2.{estados[1]}: " ))
+       
         while True:    
             if seleccionE == 1:
                 estado = estados[0]
@@ -89,9 +98,13 @@ def crear_tarea():
                 estado = estados[1]
                 break
             else:
-                print("Seleccione una opcion correcta!")            
+                print("Seleccione una opcion correcta!")
+                crear_tarea() 
+                           
         fecha_creacion = datetime.now().strftime("%d-%m-%Y, %H:%M")
-        fecha_limite = input("Ingrese la fecha de finalizacion de la tarea (Separada por guiones): ")    
+        
+        fecha_limite = input("Ingrese la fecha de finalizacion de la tarea (Separada por guiones(dia-mes-año)): ")    
+        
         nueva_tarea = {
             "No." : id_tarea,
             "Nombre" : nombre,
@@ -101,8 +114,11 @@ def crear_tarea():
             "Prioridad" : prioridad.lower(),
             "Estado": estado
             }
+        
         tareas.append(nueva_tarea)   
+        
         id_tarea += 1
+        
         print(f"La tarea se añadio correctamente! ")
         
     except Exception as e:
@@ -120,6 +136,7 @@ def listar_tareas():
     '''
     # Desplegando menu de criterios de listar tareas
     menu = ['1. Listar por estado', '2. Listar por prioridad', '3. Listar todas']
+    
     for item in menu:
         print(item)            
     seleccion = int(input("Seleccione la opcion deseada: "))
@@ -138,6 +155,7 @@ def listar_tareas():
         else:
             print("Seleccione la opcion correcta!")
             listar_tareas()
+    
     # Opcion prioridad        
     elif seleccion == 2:
         select = int(input("Seleccione 1. baja, 2. media o 3. alta: "))
@@ -165,52 +183,63 @@ def listar_tareas():
     
 # actualizar tareas
 def actualizar_tarea():
-    menu = ['No.', 'Nombre' ]
+    global tareas
+    
+    menu = ['No.', 'Nombre']
     for item in menu: 
         print(item)
     seleccion = int(input("Ingrese el tipo de busqueda de tarea 1. No. 2. Nombre: "))
     
     # Opcion numero de tarea o No.
     if seleccion == 1: 
-        for tarea in tareas: 
+        for tarea in tareas:
+            print(tarea) 
             no_tarea = int(input("Ingrese el numero de la tarea: "))
-            if tarea['No.'] == no_tarea:
-                actualizar(tarea)    
+            if tarea["No."] == no_tarea:
+                actualizar(tarea)
+                    
     elif seleccion == 2:
         for tarea in tareas:
+            print(tarea)
             nombre_tarea = input("Ingrese el nombre de la tarea: ")
-            if tarea['nombre'] == nombre_tarea:
+            if tarea["Nombre"] == nombre_tarea:
                 actualizar(tarea)
                 
 # Proceso de actualizacion separado                                             
-def actualizar(tarea):                
-    menu2 = ['1. Nombre', '2. Tarea', '3. Fecha Finalizacion', '4. Prioridad', '5. Estado']
-    for item in menu2:
-        print(item)
+def actualizar(item):
+    # Menu para elegir lo que quieren editar de la tarea
+    menu2 = ['1. Nombre',
+             '2. Tarea',
+             '3. Fecha Finalizacion',
+             '4. Prioridad',
+             '5. Estado']
+    for i in menu2:
+        print(i)
     seleccion2 = int(input("Seleccione una opcion: "))
+    # Switch statement para machar la seleccion y realizar la accion deseada
     match seleccion2:
         case 1:
             nuevo_nombre = input("Ingrese el nuevo nombre de la tarea: ")
-            item.update('Nombre', nuevo_nombre)   
+            item.update({"Nombre": nuevo_nombre})   
         case 2:
             nueva_tarea = input("Ingrese la nueva tarea: ")
-            item.update('Tarea', nueva_tarea)
+            item.update({'Tarea': nueva_tarea})
         case 3:
             nueva_fecha = input("Ingrese la nueva fecha limite de la tarea: ")
-            item.update('Fecha_Limite')
+            item.update({'Fecha_Limite' : nueva_fecha})
         case 4:
             prioridades = ['1. baja', '2. media', '3. alta']
             for item in prioridades:
                 print(item)
             nueva_prioridad = int(input("Seleccione la prioridad deseada:"))
             if nueva_prioridad == 1:
-                item.update('Prioridad', "baja")
+                item.update({'Prioridad': "baja"})
                 print("Prioridad actualizada con exito!")        
             elif nueva_prioridad == 2:
-                item.update('Prioridad', "media")
+                item.update({'Prioridad': "media"})
                 print("Prioridad actualizada con exito!")
             elif nueva_prioridad == 3:
-                item.update('Prioridad', "alta")
+                item.update({'Prioridad': "alta"})
                 print("Prioridad actualizada con exito!")    
             else:
                 print("Ingrese una opcion correcta!")
@@ -220,13 +249,14 @@ def actualizar(tarea):
                 print(item)
             nuevo_estado = int(input("Seleccione el nuevo estado deseado:"))
             if nuevo_estado == 1:
-                item.update('Estado', "pendiente")
+                item.update({'Estado': "pendiente"})
                 print("Estado actualizado con exito!")        
             elif nueva_prioridad == 2:
-                item.update('Estado', "completado")
+                item.update({'Estado': "completado"})
                 print("Estado actualizado con exito!")    
             else:
-                print("Ingrese una opcion valida!")                    
+                print("Ingrese una opcion valida!")                 
+                   
 def eliminar_tareas():
     '''
     funcion para eliminar las tareas con 2 criterios de busqueda: No. y Nombre

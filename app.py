@@ -1,3 +1,13 @@
+'''
+Proyecto final del curso Curso de Fundamentos de Programación con Python
+
+Grupo conformado por:
+
+Oriver Segura
+Mario Melvin Cabrera Martinez
+
+'''
+    
 # Importamos las librerias necesarias
 # Libreria Time para poner un sleep a la salida y no sea brusca
 import time
@@ -46,4 +56,3 @@ while True:
             break
         case _:
             print("Seleccione una opcion valida! ")
-1
